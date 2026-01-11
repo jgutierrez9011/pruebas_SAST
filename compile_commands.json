@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "C:/Users/User/Documents/UNIR/Semestre 2/Desarrollo_de_software_seguro_y_auditoria_de_la_ciberseguridad/Actividades/Actividad 2/pruebas_SAST",
+    "command": "gcc -c buffer_overflow.c -o buffer_overflow.o -std=c11 -O0 -g",
+    "file": "buffer_overflow.c"
+  }
+]

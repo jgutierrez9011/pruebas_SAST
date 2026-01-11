@@ -1,0 +1,9 @@
+21:54:25.125 INFO  Scanner configuration file: C:\sonar-scanner\sonar-scanner-8.0.1.6346-windows-x64\bin\..\conf\sonar-scanner.properties
+21:54:25.152 INFO  Project root configuration file: C:\Users\User\Documents\UNIR\Semestre 2\Desarrollo_de_software_seguro_y_auditoria_de_la_ciberseguridad\Actividades\Actividad 2\pruebas_SAST\sonar-project.properties
+21:54:25.167 INFO  SonarScanner CLI 8.0.1.6346
+21:54:25.175 INFO  Windows 11 10.0 amd64
+21:54:28.200 INFO  Communicating with SonarQube Cloud
+21:54:28.200 INFO  JRE provisioning: os[windows], arch[amd64]
+21:54:29.029 ERROR Failed to query JRE metadata: GET https://api.sonarcloud.io/analysis/jres?os=windows&arch=amd64 failed with HTTP 403 Forbidden. Please check the property sonar.token or the environment variable SONAR_TOKEN.
+21:54:29.030 INFO  EXECUTION FAILURE
+21:54:29.031 INFO  Total time: 3.908s
