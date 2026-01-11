@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #define BUFSIZE 256
 int main(int argc, char **argv) {
 char *buf;

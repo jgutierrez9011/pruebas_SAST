@@ -1,33 +1,44 @@
-name: SonarCloud Scan
+name: SonarCloud
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
 
 jobs:
   sonarcloud:
-    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install build tools
-        run: sudo apt-get update && sudo apt-get install -y build-essential
-
-      - name: (Optional) Build / ensure compile_commands.json
         run: |
-          # Si ya tienes compile_commands.json en el repo, esta parte puede omitirse.
-          if [ -f compile_commands.json ]; then
-            echo "compile_commands.json already present"
-          else
-            # Compila el archivo para comprobar el build (no necesario para generar compile_commands.json)
-            gcc -c buffer_overflow.c -o buffer_overflow.o -std=c11 -O0 -g
-          fi
+          sudo apt-get update
+          sudo apt-get install -y cmake gcc
+
+      - name: Configure (generate compile_commands.json)
+        run: |
+          cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+      - name: Build
+        run: |
+          cmake --build build
+
+      - name: Copy compile_commands.json to repo root
+        run: |
+          cp build/compile_commands.json compile_commands.json
+          ls -la compile_commands.json
+          head -n 5 compile_commands.json
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >
+            -Dsonar.cfamily.compile-commands=compile_commands.json
